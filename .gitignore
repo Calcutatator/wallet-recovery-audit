@@ -1,0 +1,36 @@
+# Local environments and caches
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+.idea/
+.vscode/
+
+# Private audit inputs, outputs and provider credentials
+.env
+.env.*
+*.key
+*.pem
+*.keystore
+*.json
+*.jsonl
+*.csv
+*.log
+*.sqlite*
+*.db
+*.zip
+audit*/
+*-audit*/
+run/
+runs/
+evidence/
+reports/
+private/
+local/
+credentials*
+secrets*
+wallets*
+addresses*
