@@ -1,0 +1,4 @@
+interface:
+  display_name: "Wallet Recovery Audit"
+  short_description: "Deep EVM, Solana and Starknet recovery research"
+  default_prompt: "Use $wallet-recovery-audit to collect my public wallet addresses and investigate hidden balances, claims and bridge settlements across EVM, Solana and Starknet."
