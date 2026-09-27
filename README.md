@@ -4,7 +4,27 @@ An agent skill for deep, read-only research into overlooked funds across **EVM, 
 
 It collects public addresses, follows historical activity into niche networks and protocols, reconciles bridges, and explains practical recovery routes. It distinguishes recorded balances from assets with backing and a usable exit.
 
-## Install
+## Install with an agent
+
+Copy this into Codex or another agent that can install local skills:
+
+```text
+Install the Wallet Recovery Audit skill from:
+https://github.com/Calcutatator/wallet-recovery-audit
+
+Inspect the repository first. In Codex, install it as
+${CODEX_HOME}/skills/wallet-recovery-audit if CODEX_HOME is set,
+otherwise ~/.codex/skills/wallet-recovery-audit.
+For another host, use its documented SKILL.md installation location.
+If a copy already exists, compare it and preserve local changes.
+Read SKILL.md, then use the skill to guide me through the EVM,
+Solana and Starknet public-address intake and a read-only audit.
+Keep my addresses and audit outputs outside the installed skill.
+```
+
+If the host needs to refresh its skill list, open a new task after installation and use the run prompt below.
+
+## Manual installation in Codex
 
 In Codex, clone this repository into your local skills directory:
 
@@ -14,13 +34,32 @@ git clone https://github.com/Calcutatator/wallet-recovery-audit.git \
   "${CODEX_HOME:-$HOME/.codex}/skills/wallet-recovery-audit"
 ```
 
-Start a new task and ask:
+If the destination already contains files, the clone command stops; compare that copy before updating it. Alternatively, use GitHub's **Code → Download ZIP** and follow [INSTALL.md](INSTALL.md).
+
+## Run the audit
+
+Start a new task in your agent and paste:
 
 ```text
-Use $wallet-recovery-audit and guide me through the address intake.
+Use $wallet-recovery-audit. Ask me for my EVM, Solana and Starknet
+public addresses in order, letting me skip any group with "none".
+Run the deep read-only audit, follow niche protocols and bridges,
+and produce the combined report and CSV ledgers with full copyable
+addresses, evidence, coverage gaps and practical recovery steps.
 ```
 
-Other agents supporting `SKILL.md` can use their documented import mechanism. See [installation and requirements](INSTALL.md) or use the longer [starter prompt](START-PROMPT.md).
+Reply to the address prompts with public addresses, one per line. You do not need to connect a wallet or run the Python helper yourself. For a finding you want to recover, ask: “Show me how to recover this finding using my full sending address.”
+
+Live research requires the agent to have browsing or HTTP/RPC access. Missing providers or historical data must be reported as gaps. Python 3.10+ is optional and only needed for the local helper; installing the skill alone does not execute a blockchain scan.
+
+For other hosts, invoke the skill using that host's mechanism or ask the agent to read the installed `SKILL.md` and follow it. A longer [starter prompt](START-PROMPT.md) is also available.
+
+### Instructions for agents executing the skill
+
+1. Load [SKILL.md](SKILL.md) as the entry point, then [evidence and outputs](references/evidence-and-output.md) and the applicable chain/bridge guides it links to.
+2. Collect the three address groups in order. Treat only an explicit “none” as a skipped group; do not search unrelated files or memory for wallets.
+3. Keep input, evidence and reports in a private run directory outside this repository. If using the offline helper, follow [data-format.md](references/data-format.md); it validates and exports data, but does not perform the research.
+4. Use available read-only tools to investigate, document coverage and verify findings. Follow the skill's stopping conditions and claim handoff rules, then return the combined report and linked artifacts. Never sign, broadcast or move funds.
 
 ## What it does
 
